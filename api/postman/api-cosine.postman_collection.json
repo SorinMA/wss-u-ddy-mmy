@@ -1,0 +1,62 @@
+{
+	"info": {
+		"_postman_id": "1bd4285c-9c7e-4ae6-96f1-0d51e602b4be",
+		"name": "api-cosine",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "home",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "upload",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "dad",
+							"type": "file",
+							"src": "/C:/Users/sorin/WORKSPACE/who's your ddy/api/static/dad.jpg"
+						},
+						{
+							"key": "mom",
+							"type": "file",
+							"src": "/C:/Users/sorin/WORKSPACE/who's your ddy/api/static/mom.jpg"
+						},
+						{
+							"key": "child",
+							"type": "file",
+							"src": "/C:/Users/sorin/WORKSPACE/who's your ddy/api/static/child.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/get-mom-dad-child",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"get-mom-dad-child"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
