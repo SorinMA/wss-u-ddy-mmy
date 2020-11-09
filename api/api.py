@@ -3,8 +3,11 @@ from flask import send_file, jsonify, request
 from helperCosineAndIncetion import getInceptionV3, inferenceOverImage, getCosineSimilarityLoss
 import os
 import numpy as np
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 cosineLoss = None
 modelInceptionV3NN = None
@@ -16,6 +19,7 @@ def apiHome():
     })
 
 @app.route('/get-mom-dad-child', methods=['POST'])
+@cross_origin()
 def apiUploadAndInfere():
     try:
         dad = request.files['dad']
