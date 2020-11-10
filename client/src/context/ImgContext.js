@@ -7,6 +7,7 @@ function ImgProvider(props) {
     let [dad, setDad] = useState(undefined)
     let [mom, setMom] = useState(undefined)
     let [child, setChild] = useState(undefined)
+    let [onSend, setOnSend] = useState(false)
     
     const newImage = (id, path) => {
         if (id === 'dad') {
@@ -33,7 +34,10 @@ function ImgProvider(props) {
             return;
         }
 
+        setOnSend(true);
+
         // thx to: https://medium.com/@mahesh_joshi/reactjs-nodejs-upload-image-how-to-upload-image-using-reactjs-and-nodejs-multer-918dc66d304c
+        
         const formData = new FormData();
         formData.append('dad', dad);
         formData.append('mom', mom);
@@ -43,20 +47,38 @@ function ImgProvider(props) {
                 'content-type': 'multipart/form-data'
             }
         };
+
         axios.post("http://localhost:5000/get-mom-dad-child",formData,config)
             .then((response) => {
-                alert("The file is successfully uploaded");
+                //alert("The file is successfully uploaded");
                 console.log(response)
-                document.getElementById('serverResponse').innerHTML  = JSON.stringify(response.data);
+            
+                const dad = response.data.dad;
+                const mom = response.data.mom;
+
+                if(dad === false && mom === false) {
+                    document.getElementById('serverResponse').innerHTML  = "It is adopted?";
+                } else {
+                    if (dad) {
+                        document.getElementById('serverResponse').innerHTML  = "DAD DAD DAD";
+                    } else {
+                        document.getElementById('serverResponse').innerHTML  = "Mommy will always win!";
+                    }
+                }
+                setOnSend(false);
             }).catch((error) => {
+                setOnSend(false);
+                alert("fail to connect to server!");
         });
+        
     }
 
     return (
         <ImgContext.Provider 
             value={{
                     newImage:newImage,
-                    sendImages: sendImages
+                    sendImages: sendImages,
+                    onSend: onSend
                 }}
         >
             {props.children}
