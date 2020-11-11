@@ -1,0 +1,23 @@
+version: '3.3'
+
+services: 
+    nginxservice:
+        depends_on: 
+            - clientwsd
+            - apiwsd
+        restart: always
+        build:
+            dockerfile: Dockerfile
+            context: ./nginx
+        ports: 
+            - '80:80' 
+    clientwsd:
+        stdin_open: true 
+        build: 
+            dockerfile: Dockerfile
+            context: ./client
+        
+    apiwsd:
+        build:
+            dockerfile: Dockerfile
+            context: ./api

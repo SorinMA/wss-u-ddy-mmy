@@ -76,4 +76,4 @@ if __name__ == '__main__':
 
     print("The moodel & cosine loss are setup!")
 
-    app.run()
+    app.run(host='0.0.0.0') # this is for docker to work

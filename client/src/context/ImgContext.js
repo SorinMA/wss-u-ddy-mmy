@@ -48,7 +48,7 @@ function ImgProvider(props) {
             }
         };
 
-        axios.post("http://localhost:5000/get-mom-dad-child",formData,config)
+        axios.post("/api/get-mom-dad-child",formData,config) // change made for docker running
             .then((response) => {
                 //alert("The file is successfully uploaded");
                 console.log(response)
